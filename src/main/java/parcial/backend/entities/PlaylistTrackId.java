@@ -16,6 +16,4 @@ public class PlaylistTrackId implements Serializable {
     private Long playlistId;
     private Long trackId;
 
-    // Constructor, getters y setters
-    // Asegúrate de implementar hashCode y equals correctamente
 }

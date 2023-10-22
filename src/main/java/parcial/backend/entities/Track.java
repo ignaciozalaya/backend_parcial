@@ -16,17 +16,17 @@ import lombok.AccessLevel;
 public class Track {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "track_id")
     Long trackId;
 
     @Column(length = 200, nullable = false)
     String name;
 
     @ManyToOne
-    @JoinColumn(name = "album_id")
+    @JoinColumn(name = "AlbumId")
     Album album;
 
     @ManyToOne
+    @JoinColumn(name = "MediaTypeId")
     MediaType mediaType;
 
     @ManyToOne
