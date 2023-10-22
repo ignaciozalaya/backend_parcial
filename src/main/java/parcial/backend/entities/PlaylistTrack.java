@@ -13,8 +13,9 @@ import lombok.AccessLevel;
 @AllArgsConstructor
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@Table(name = "playlist_track")
+@Table(name = PlaylistTrack.TABLE_NAME)
 public class PlaylistTrack {
+    public static final String TABLE_NAME = "playlist_track";
     @EmbeddedId
     PlaylistTrackId id;
 

@@ -21,12 +21,14 @@ import jakarta.persistence.Table;
 @AllArgsConstructor
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@Table(name = "albums")
+@Table(name = Album.TABLE_NAME)
 public class Album {
+    public static final String TABLE_NAME = "albums";
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "AlbumId")
-    Long albumId;
+    Integer albumId;
 
     @Column(name="Title", length = 160, nullable = false)
     String title;

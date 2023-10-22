@@ -8,12 +8,13 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
 
 @Entity
-@Table(name = "artists")
+@Table(name =Artist.TABLE_NAME)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Artist {
+    public static final String TABLE_NAME = "artists";
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long artistId;

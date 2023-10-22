@@ -13,8 +13,9 @@ import lombok.AccessLevel;
 @AllArgsConstructor
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@Table(name = "playlists")
+@Table(name = Playlist.TABLE_NAME)
 public class Playlist {
+    public static final String TABLE_NAME = "playlists";
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long playlistId;

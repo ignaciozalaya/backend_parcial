@@ -1,4 +1,4 @@
-package parcial.backend.serviceImpl;
+package parcial.backend.service;
 
 import org.springframework.stereotype.Service;
 import parcial.backend.entities.Genre;

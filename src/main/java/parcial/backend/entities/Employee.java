@@ -15,8 +15,10 @@ import lombok.AccessLevel;
 @AllArgsConstructor
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@Table(name = "employees")
+@Table(name = Employee.TABLE_NAME)
 public class Employee {
+    public static final String TABLE_NAME = "employees";
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long employeeId;

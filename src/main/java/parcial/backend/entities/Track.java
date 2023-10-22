@@ -11,9 +11,11 @@ import lombok.AccessLevel;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "tracks")
+@Table(name = Track.TABLE_NAME)
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Track {
+    public static final String TABLE_NAME = "tracks";
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long trackId;
@@ -44,3 +46,4 @@ public class Track {
     @Column(name = "UnitPrice")
     Long unitPrice;
 }
+

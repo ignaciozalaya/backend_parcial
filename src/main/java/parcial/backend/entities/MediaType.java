@@ -18,8 +18,9 @@ import lombok.AccessLevel;
 @AllArgsConstructor
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@Table(name = "media_types")
+@Table(name = MediaType.TABLE_NAME)
 public class MediaType {
+    public static final String TABLE_NAME = "media_types";
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long mediaTypeId;

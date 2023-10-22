@@ -1,4 +1,4 @@
-package parcial.backend.controller;
+package parcial.backend.application.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;

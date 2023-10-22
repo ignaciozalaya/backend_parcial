@@ -12,8 +12,10 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@Table(name = "genres")
+@Table(name = Genre.TABLE_NAME)
 public class Genre {
+    public static final String TABLE_NAME = "genres";
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long genreId;

@@ -13,8 +13,9 @@ import lombok.AccessLevel;
 @AllArgsConstructor
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@Table(name = "invoice_items")
+@Table(name = InvoiceItem.TABLE_NAME)
 public class InvoiceItem {
+    public static final String TABLE_NAME = "invoice_items";
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long invoiceLineId;
