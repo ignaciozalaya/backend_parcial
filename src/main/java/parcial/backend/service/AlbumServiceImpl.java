@@ -46,9 +46,10 @@ public class AlbumServiceImpl implements AlbumService {
     }
 
     @Override
-    public List<Album> getAll() {
-        return null;
+    public List<Album> findAll() {
+        return albumRepository.findAll();
     }
+
 
     @Override
     public Album getById(Integer id) {

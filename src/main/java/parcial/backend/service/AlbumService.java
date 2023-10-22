@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface AlbumService {
     Album create(String title, String artistName);
-    public List<Album> getAll();
+    List<Album> findAll();
     public Album   getById(Integer id);
 
 }

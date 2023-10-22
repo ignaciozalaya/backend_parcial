@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import parcial.backend.application.ResponseHandler;
 import parcial.backend.application.request.CreateAlbumRequest;
+import parcial.backend.application.response.AlbumResponse;
 import parcial.backend.entities.Album;
 import parcial.backend.service.AlbumService;
 
@@ -26,12 +27,20 @@ public class AlbumController {
         this.albumService = albumService;
     }
 
-    @GetMapping()
-    public List<Album> albums() {
-        List<Album> albums = albumService.getAll();
-        return albums.stream().toList();
+    @GetMapping
+    public ResponseEntity<Object> findAll() {
+        try {
+            val customers = albumService.findAll()
+                    .stream()
+                    .map(AlbumResponse::from)
+                    .toList();
+            return ResponseHandler.success(customers);
+        } catch (IllegalArgumentException e) {
+            return ResponseHandler.badRequest(e.getMessage());
+        } catch (Exception e) {
+            return ResponseHandler.internalError();
+        }
     }
-
     @GetMapping("/{id}")
     public ResponseEntity<Object> albumId(@PathVariable("id")Integer id) {
         try {
