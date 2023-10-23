@@ -10,10 +10,8 @@ import parcial.backend.application.ResponseHandler;
 import parcial.backend.application.request.CreateAlbumRequest;
 import parcial.backend.application.request.UpdateAlbumRequest;
 import parcial.backend.application.response.AlbumResponse;
-import parcial.backend.entities.Album;
 import parcial.backend.service.AlbumService;
 
-import java.util.List;
 import java.util.NoSuchElementException;
 
 
@@ -44,7 +42,7 @@ public class AlbumController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Object> albumId(@PathVariable("id") Integer id) {
+    public ResponseEntity<Object> findOne(@PathVariable("id") Integer id) {
         try {
             return albumService.findById(id)
                     .map(aCustomer -> ResponseHandler.success(AlbumResponse.from(aCustomer)))
@@ -56,7 +54,7 @@ public class AlbumController {
 
     // Agregar un nuevo álbum
     @PostMapping
-    public ResponseEntity<Object> addAlbum(@RequestBody CreateAlbumRequest aRequest) {
+    public ResponseEntity<Object> create(@RequestBody CreateAlbumRequest aRequest) {
         try {
             val album = albumService.create(
                     aRequest.getTitle(),
@@ -81,5 +79,19 @@ public class AlbumController {
             return ResponseHandler.internalError();
         }
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Object> delete(@PathVariable Integer id) {
+        try {
+            albumService.delete(id);
+            return ResponseHandler.noContent();
+        } catch (IllegalArgumentException e) {
+            //Ya fue borrado, asiq devuelvo 204
+            return ResponseHandler.noContent();
+        } catch (Exception e) {
+            return ResponseHandler.internalError();
+        }
+    }
+
 
 }

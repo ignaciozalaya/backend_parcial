@@ -50,7 +50,13 @@ public class AlbumServiceImpl implements AlbumService {
 
     }
     @Override
-    public void delete(Integer integer) {
+    @Transactional
+    public void delete(final Integer id) {
+        try {
+            albumRepository.deleteById(id);
+        } catch (Exception e) {
+            throw new IllegalArgumentException("Album not found");
+        }
     }
 
     @Override
