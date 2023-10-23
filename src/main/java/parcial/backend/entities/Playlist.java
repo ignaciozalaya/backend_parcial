@@ -18,8 +18,12 @@ public class Playlist {
     public static final String TABLE_NAME = "playlists";
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long playlistId;
+    Integer playlistId;
 
     @Column(length = 120, nullable = false)
     String name;
+
+    public void update(String name ) {
+        this.name = name;
+    }
 }

@@ -1,4 +1,6 @@
 package parcial.backend.service;
 
-public interface PlaylistTrackService {
+import parcial.backend.entities.PlaylistTrack;
+
+public interface PlaylistTrackService extends Service<Integer, PlaylistTrack> {
 }
