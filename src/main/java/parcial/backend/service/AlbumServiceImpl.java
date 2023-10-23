@@ -16,12 +16,8 @@ import lombok.val;
 
 @Service
 public class AlbumServiceImpl implements AlbumService {
-
-
     private final AlbumRepository albumRepository;
-
     private final IdentifierRepository identifierRepository;
-
     private final ArtistService artistService;
 
     public AlbumServiceImpl(AlbumRepository albumRepository,
@@ -32,7 +28,6 @@ public class AlbumServiceImpl implements AlbumService {
         this.identifierRepository = identifierRepository;
     }
 
-
     @Override
     @Transactional
     public Album create(String title, String artistName) {
@@ -42,7 +37,6 @@ public class AlbumServiceImpl implements AlbumService {
         val album = new Album(albumId, title, artist);
 
         return albumRepository.save(album);
-
     }
 
     @Override
@@ -50,9 +44,24 @@ public class AlbumServiceImpl implements AlbumService {
         return albumRepository.findAll();
     }
 
+    @Override
+    public Optional<Album> findById(Integer id) {
+        return albumRepository.findById(id);
+
+    }
+    @Override
+    public void delete(Integer integer) {
+    }
 
     @Override
-    public Album getById(Integer id) {
-        return null;
+    @Transactional
+    public void update(Integer id, String title, String artistName) {
+        // Actualizar un album asociando un artist
+        val album = albumRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Album not Found"));
+        val artist = artistService.findByName(artistName).
+                orElseThrow(() -> new IllegalArgumentException("Artist not Found"));
+        album.update(title, artist);
+        albumRepository.save(album);
     }
 }

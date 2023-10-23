@@ -5,31 +5,24 @@ import parcial.backend.entities.Genre;
 import parcial.backend.service.GenreService;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class GenreServiceImpl implements GenreService {
-    @Override
-    public void add(Genre entity) {
 
-    }
 
     @Override
-    public void update(Genre entity) {
-
-    }
-
-    @Override
-    public Genre delete(Long aLong) {
+    public List<Genre> findAll() {
         return null;
     }
 
     @Override
-    public Genre getById(Long aLong) {
-        return null;
+    public Optional<Genre> findById(Long aLong) {
+        return Optional.empty();
     }
 
     @Override
-    public List<Genre> getAll() {
-        return null;
+    public void delete(Long aLong) {
+
     }
 }

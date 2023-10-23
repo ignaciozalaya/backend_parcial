@@ -5,31 +5,23 @@ import parcial.backend.entities.Employee;
 import parcial.backend.service.EmployeeService;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
-    @Override
-    public void add(Employee entity) {
-
-    }
 
     @Override
-    public void update(Employee entity) {
-
-    }
-
-    @Override
-    public Employee delete(Long aLong) {
+    public List<Employee> findAll() {
         return null;
     }
 
     @Override
-    public Employee getById(Long aLong) {
-        return null;
+    public Optional<Employee> findById(Long aLong) {
+        return Optional.empty();
     }
 
     @Override
-    public List<Employee> getAll() {
-        return null;
+    public void delete(Long aLong) {
+
     }
 }

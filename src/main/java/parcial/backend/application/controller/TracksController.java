@@ -22,8 +22,9 @@ public class TracksController {
 
     @GetMapping()
     public List<Track> tracks() {
-        List<Track> tracks = trackService.getAll();
-        return tracks.stream().toList();
+//        List<Track> tracks = trackService.getAll();
+//        return tracks.stream().toList();
+        return null;
     }
 
 

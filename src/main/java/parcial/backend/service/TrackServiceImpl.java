@@ -7,37 +7,29 @@ import parcial.backend.repositories.TrackRepository;
 import parcial.backend.service.TrackService;
 
 import java.util.List;
+import java.util.Optional;
+
 @Service
 public class TrackServiceImpl implements TrackService {
     private final TrackRepository trackRepository;
-    public TrackServiceImpl( TrackRepository trackRepository ) {
+
+    public TrackServiceImpl(TrackRepository trackRepository) {
         this.trackRepository = trackRepository;
     }
-    @Override
-    public void add(Track entity) {
-
-    }
 
     @Override
-    public void update(Track entity) {
-
-    }
-
-    @Override
-    public Track delete(Long aLong) {
+    public List<Track> findAll() {
         return null;
     }
 
     @Override
-    public Track getById(Long aLong) {
-        return null;
+    public Optional<Track> findById(Long aLong) {
+        return Optional.empty();
     }
 
     @Override
-    public List<Track> getAll() {
-        List<Track> tracks = this.trackRepository.findAll();
-        return tracks
-                .stream()
-                .toList();
+    public void delete(Long aLong) {
+
     }
 }
+

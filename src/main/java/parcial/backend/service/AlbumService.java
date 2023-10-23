@@ -4,9 +4,8 @@ import parcial.backend.entities.Album;
 
 import java.util.List;
 
-public interface AlbumService {
+public interface AlbumService extends Service<Album, Integer> {
     Album create(String title, String artistName);
-    List<Album> findAll();
-    public Album   getById(Integer id);
+    void update(Integer id, String title, String artistName);
 
 }

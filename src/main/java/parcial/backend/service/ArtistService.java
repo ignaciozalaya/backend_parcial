@@ -5,8 +5,9 @@ import parcial.backend.entities.Artist;
 
 import java.util.Optional;
 
-public interface ArtistService extends Service<Artist, Long> {
+public interface ArtistService extends Service<Artist, Integer> {
 
     Optional<Artist> findByName(String Name);
+
 
 }

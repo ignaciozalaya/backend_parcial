@@ -16,6 +16,8 @@ import jakarta.persistence.Column;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Data
 @AllArgsConstructor
@@ -36,4 +38,9 @@ public class Album {
     @ManyToOne
     @JoinColumn(name = "ArtistId")
     Artist artist;
+
+    public void update(String aTitle, Artist aArtist ) {
+        this.title = aTitle;
+        this.artist = aArtist;
+    }
 }

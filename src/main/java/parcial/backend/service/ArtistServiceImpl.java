@@ -19,32 +19,22 @@ public class ArtistServiceImpl implements ArtistService {
     }
 
     @Override
-    public void add(Artist entity) {
-
-    }
-
-    @Override
-    public void update(Artist entity) {
-
-    }
-
-    @Override
-    public Artist delete(Long aLong) {
-        return null;
-    }
-
-    @Override
-    public Artist getById(Long aLong) {
-        return null;
-    }
-
-    @Override
-    public List<Artist> getAll() {
-        return null;
-    }
-
-    @Override
     public Optional<Artist> findByName(String name) {
         return artistRepository.findByName(name);
+    }
+
+    @Override
+    public List<Artist> findAll() {
+        return null;
+    }
+
+    @Override
+    public Optional<Artist> findById(Integer integer) {
+        return Optional.empty();
+    }
+
+    @Override
+    public void delete(Integer integer) {
+
     }
 }

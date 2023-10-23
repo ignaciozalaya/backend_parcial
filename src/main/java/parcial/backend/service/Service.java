@@ -1,13 +1,11 @@
 package parcial.backend.service;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface Service <T, ID> {
-
-    void add(T entity);
-    void update(T entity);
-    T delete(ID id);
-    T getById(ID id);
-    List<T> getAll();
+    List<T> findAll();
+    Optional<T> findById(ID id);
+    void delete(ID id);
 
 }

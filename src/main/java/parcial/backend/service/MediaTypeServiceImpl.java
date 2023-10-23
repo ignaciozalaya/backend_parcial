@@ -5,30 +5,23 @@ import parcial.backend.entities.MediaType;
 import parcial.backend.service.MediaTypeService;
 
 import java.util.List;
+import java.util.Optional;
+
 @Service
 public class MediaTypeServiceImpl implements MediaTypeService {
-    @Override
-    public void add(MediaType entity) {
-
-    }
 
     @Override
-    public void update(MediaType entity) {
-
-    }
-
-    @Override
-    public MediaType delete(Long aLong) {
+    public List<MediaType> findAll() {
         return null;
     }
 
     @Override
-    public MediaType getById(Long aLong) {
-        return null;
+    public Optional<MediaType> findById(Long aLong) {
+        return Optional.empty();
     }
 
     @Override
-    public List<MediaType> getAll() {
-        return null;
+    public void delete(Long aLong) {
+
     }
 }

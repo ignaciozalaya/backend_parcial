@@ -5,30 +5,23 @@ import parcial.backend.entities.Playlist;
 import parcial.backend.service.PlaylistService;
 
 import java.util.List;
+import java.util.Optional;
+
 @Service
 public class PlaylistServiceImpl implements PlaylistService {
-    @Override
-    public void add(Playlist entity) {
-
-    }
 
     @Override
-    public void update(Playlist entity) {
-
-    }
-
-    @Override
-    public Playlist delete(Long aLong) {
+    public List<Playlist> findAll() {
         return null;
     }
 
     @Override
-    public Playlist getById(Long aLong) {
-        return null;
+    public Optional<Playlist> findById(Long aLong) {
+        return Optional.empty();
     }
 
     @Override
-    public List<Playlist> getAll() {
-        return null;
+    public void delete(Long aLong) {
+
     }
 }
