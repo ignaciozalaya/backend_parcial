@@ -17,8 +17,13 @@ public class Artist {
     public static final String TABLE_NAME = "artists";
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long artistId;
+    Integer artistId;
 
     @Column(length = 120)
     String name;
+
+    public void update(String name ) {
+        this.name = name;
+    }
+
 }

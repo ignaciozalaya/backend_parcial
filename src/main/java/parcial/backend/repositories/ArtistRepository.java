@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface ArtistRepository extends JpaRepository<Artist, Long> {
+public interface ArtistRepository extends JpaRepository<Artist, Integer> {
     @Query("SELECT a FROM Artist a WHERE a.name = ?1")
     Optional<Artist> findByName(String Name);
 

@@ -29,11 +29,11 @@ public class AlbumController {
     @GetMapping
     public ResponseEntity<Object> findAll() {
         try {
-            val customers = albumService.findAll()
+            val responses = albumService.findAll()
                     .stream()
                     .map(AlbumResponse::from)
                     .toList();
-            return ResponseHandler.success(customers);
+            return ResponseHandler.success(responses);
         } catch (IllegalArgumentException e) {
             return ResponseHandler.badRequest(e.getMessage());
         } catch (Exception e) {
