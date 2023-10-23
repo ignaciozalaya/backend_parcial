@@ -26,9 +26,7 @@ public class AlbumServiceImpl implements AlbumService {
     }
 
     @Override
-    public void update(Album entity) {
-
-    }
+    public void update(Album entity) { this.albumRepository.save(entity); }
 
     @Override
     public Album delete(Long aLong) {

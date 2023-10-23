@@ -7,6 +7,8 @@ import parcial.backend.repositories.TrackRepository;
 import parcial.backend.service.TrackService;
 
 import java.util.List;
+import java.util.Optional;
+
 @Service
 public class TrackServiceImpl implements TrackService {
     private final TrackRepository trackRepository;
@@ -30,7 +32,10 @@ public class TrackServiceImpl implements TrackService {
 
     @Override
     public Track getById(Long aLong) {
-        return null;
+        Optional<Track> optionalTrack = this.trackRepository.findById(aLong);
+        return optionalTrack
+                .orElseThrow();
+
     }
 
     @Override
