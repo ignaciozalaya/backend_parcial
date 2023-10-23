@@ -17,17 +17,20 @@ public class TrackServiceImpl implements TrackService {
     }
     @Override
     public void add(Track entity) {
-
+        this.trackRepository.save(entity);
     }
 
     @Override
     public void update(Track entity) {
-
+        this.trackRepository.save(entity);
     }
 
     @Override
     public Track delete(Long aLong) {
-        return null;
+        Optional<Track> optionalTrack = this.trackRepository.findById(aLong);
+        optionalTrack.ifPresent(this.trackRepository::delete);
+        return optionalTrack
+                .orElseThrow();
     }
 
     @Override

@@ -19,11 +19,11 @@ public class PlaylistTrack {
     PlaylistTrackId id;
 
     @ManyToOne
-    @MapsId("playlistId")
+    @JoinColumn(name = "PlaylistId")
     Playlist playlist;
 
     @ManyToOne
-    @MapsId("trackId")
+    @JoinColumn(name = "TrackId")
     Track track;
 }
 
