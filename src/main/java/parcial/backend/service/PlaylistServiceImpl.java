@@ -30,7 +30,7 @@ public class PlaylistServiceImpl implements PlaylistService {
 
     @Override
     public Optional<Playlist> findById(Integer id) {
-        return playlistRepository.findById(id);
+        return playlistRepository.findByIdWithTracks(id);
     }
 
     @Override

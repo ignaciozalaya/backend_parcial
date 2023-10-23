@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.AccessLevel;
 
+import java.util.List;
+
 @Entity
 @Data
 @NoArgsConstructor
@@ -22,6 +24,9 @@ public class Track {
 
     @Column(length = 200, nullable = false)
     String name;
+
+    @ManyToMany(mappedBy = "tracks")
+    List<Playlist> playlists;
 
     @ManyToOne
     @JoinColumn(name = "AlbumId")

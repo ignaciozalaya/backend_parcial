@@ -9,10 +9,15 @@ import parcial.backend.application.request.CreateArtistRequest;
 import parcial.backend.application.request.CreatePlaylistRequest;
 import parcial.backend.application.response.ArtistResponse;
 import parcial.backend.application.response.PlaylistResponse;
+import parcial.backend.application.response.PlaylistWithTracksResponse;
+import parcial.backend.entities.Playlist;
+import parcial.backend.entities.Track;
 import parcial.backend.service.ArtistService;
 import parcial.backend.service.PlaylistService;
 
+import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/playlist")
@@ -42,9 +47,15 @@ public class PlaylistController {
     @GetMapping("/{id}")
     public ResponseEntity<Object> findOne(@PathVariable("id") Integer id) {
         try {
-            return playlistService.findById(id)
-                    .map(playlist -> ResponseHandler.success(PlaylistResponse.from(playlist)))
-                    .orElseGet(ResponseHandler::notFound);
+            Optional<Playlist> optionalPlaylist = playlistService.findById(id);
+            if (optionalPlaylist.isPresent()) {
+                Playlist playlist = optionalPlaylist.get();
+                List<Track> top10Tracks = playlist.getTracks().subList(0, Math.min(10, playlist.getTracks().size()));
+                playlist.setTracks(top10Tracks);
+                return ResponseHandler.success(PlaylistWithTracksResponse.from(playlist));
+            } else {
+                return ResponseHandler.notFound();
+            }
         } catch (NoSuchElementException ex) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
