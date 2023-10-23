@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.AccessLevel;
 
+import java.util.List;
+
 @Entity
 @Data
 @NoArgsConstructor
@@ -43,4 +45,7 @@ public class Track {
 
     @Column(name = "UnitPrice")
     Long unitPrice;
+
+    @ManyToMany(mappedBy = "tracks")
+    private List<Playlist> playlists;
 }

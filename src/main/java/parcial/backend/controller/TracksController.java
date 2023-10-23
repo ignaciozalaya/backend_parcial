@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import parcial.backend.entities.Album;
 import parcial.backend.entities.Track;
+import parcial.backend.entities.dtos.TrackDto;
 import parcial.backend.service.TrackService;
 
 import java.util.List;
@@ -25,18 +26,17 @@ public class TracksController {
     }
 
     @GetMapping()
-    public List<Track> getAll() {
-        List<Track> tracks = trackService.getAll();
-        return tracks.stream().toList();
+    public ResponseEntity<List<TrackDto>>getAll() {
+        List<TrackDto> tracks = trackService.getAll();
+        return ResponseEntity.ok(tracks);
     }
     @GetMapping("/{id}")
-    public ResponseEntity<Track> getById(@PathVariable("id") Long trackId){
+    public ResponseEntity<TrackDto> getById(@PathVariable("id") Long trackId){
         try {
-            Track track = trackService.getById(trackId);
+            TrackDto track = trackService.getById(trackId);
             return ResponseEntity.ok(track);
         } catch (NoSuchElementException ex) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
     }
-
 }

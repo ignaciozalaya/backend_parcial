@@ -58,9 +58,10 @@ public class ArtistController {
         }
     }
 
-    @PatchMapping("/{id}")
-    public ResponseEntity<Object> updateArtist(@PathVariable("id")Long id, @RequestBody Artist artist) {
+    @PatchMapping()
+    public ResponseEntity<Object> updateArtist(@RequestBody Artist artist) {
         try {
+
             artistService.update(artist);
             return ResponseEntity.status(HttpStatus.OK).build();
         } catch (NoSuchElementException ex) {

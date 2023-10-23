@@ -21,7 +21,14 @@ public class ArtistServiceImpl implements ArtistService {
     public void add(Artist entity) { this.artistRepository.save(entity);}
 
     @Override
-    public void update(Artist entity) { this.artistRepository.save(entity);}
+    public void update(Artist entity) {
+        if(entity.getArtistId() == null){
+            throw new IllegalArgumentException("El id no puede ser nulo");
+        }
+        Artist artist = this.getById(entity.getArtistId());
+        artist.setName(entity.getName());
+        this.artistRepository.save(artist);
+    }
 
     @Override
     public Artist delete(Long aLong) {
