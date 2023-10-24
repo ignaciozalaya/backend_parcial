@@ -97,13 +97,17 @@ public class TrackServiceImplTest {
 
     @Test
     void testGetById() {
+        //Realizar test de getById
         // Simular el comportamiento del repositorio al buscar un Track por ID
         when(trackRepository.findById(1L)).thenReturn(Optional.of(new Track()));
 
         // Ejecutar el método que se va a probar
         TrackDto result = trackService.getById(1L);
 
+        // Verificar que el método delete del repositorio se llamó una vez
         assertNotNull(result);
+
+
     }
 
     @Test
