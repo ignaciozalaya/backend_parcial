@@ -9,7 +9,6 @@ import java.util.Optional;
 public interface ArtistService extends Service<Artist, Integer> {
 
     Optional<Artist> findByName(String Name);
-
     Artist create(String name);
     void update(Integer id, String name);
 

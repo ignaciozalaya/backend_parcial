@@ -20,7 +20,7 @@ public class Track {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long trackId;
+    Integer trackId;
 
     @Column(length = 200, nullable = false)
     String name;
@@ -50,5 +50,23 @@ public class Track {
 
     @Column(name = "UnitPrice")
     Long unitPrice;
+
+    public void update(String name,
+                       Album album,
+                       MediaType mediaType,
+                       Genre genre,
+                       String composer,
+                       Integer milliseconds,
+                       Integer bytes,
+                       Long unitPrice) {
+        this.name = name;
+        this.album = album;
+        this.mediaType = mediaType;
+        this.genre = genre;
+        this.composer = composer;
+        this.milliseconds = milliseconds;
+        this.bytes = bytes;
+        this.unitPrice = unitPrice;
+    }
 }
 

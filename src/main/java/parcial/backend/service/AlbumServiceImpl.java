@@ -47,7 +47,6 @@ public class AlbumServiceImpl implements AlbumService {
     @Override
     public Optional<Album> findById(Integer id) {
         return albumRepository.findById(id);
-
     }
     @Override
     @Transactional
@@ -69,5 +68,10 @@ public class AlbumServiceImpl implements AlbumService {
                 orElseThrow(() -> new IllegalArgumentException("Artist not Found"));
         album.update(title, artist);
         albumRepository.save(album);
+    }
+
+    @Override
+    public Optional<Album> findByName(String name) {
+        return albumRepository.findByName(name);
     }
 }
