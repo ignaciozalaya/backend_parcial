@@ -69,10 +69,10 @@ public class TrackServiceImpl implements TrackService {
         Album album = (Album) this.albumService.findByName(albumName).orElseThrow(() -> {
             return new IllegalArgumentException("Album not Found");
         });
-        MediaType mediaType = (MediaType) this.mediaTypeService.findByName(albumName).orElseThrow(() -> {
+        MediaType mediaType = (MediaType) this.mediaTypeService.findByName(mediaTypeName).orElseThrow(() -> {
             return new IllegalArgumentException("MediaType not Found");
         });
-        Genre genre = (Genre) this.genreService.findByName(albumName).orElseThrow(() -> {
+        Genre genre = (Genre) this.genreService.findByName(genreName).orElseThrow(() -> {
             return new IllegalArgumentException("Genre not Found");
         });
 
@@ -113,7 +113,7 @@ public class TrackServiceImpl implements TrackService {
         var mediaType = mediaTypeService.findByName(mediaTypeName).
                 orElseThrow(() -> new IllegalArgumentException("MediaType not Found"));
         var genre = genreService.findByName(genreName).
-                orElseThrow(() -> new IllegalArgumentException("MediaType not Found"));
+                orElseThrow(() -> new IllegalArgumentException("Genre not Found"));
         track.update(name,
                 album,
                 mediaType,

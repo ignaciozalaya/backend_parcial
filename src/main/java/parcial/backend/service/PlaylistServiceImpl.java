@@ -28,10 +28,7 @@ public class PlaylistServiceImpl implements PlaylistService {
         return playlistRepository.findAll();
     }
 
-    @Override
-    public Optional<Playlist> findById(Integer id) {
-        return playlistRepository.findByIdWithTracks(id);
-    }
+
 
     @Override
     @Transactional
@@ -59,4 +56,16 @@ public class PlaylistServiceImpl implements PlaylistService {
         artist.update(name);
         playlistRepository.save(artist);
     }
+
+    @Override
+    public List<Playlist> findAllByTracksTrackId(Integer trackId) {
+        val playlist = playlistRepository.findAllByTracksTrackId(trackId);
+        return playlist;
+    }
+
+    @Override
+    public Optional<Playlist> findById(Integer id) {
+        return playlistRepository.findById(id);
+    }
+
 }

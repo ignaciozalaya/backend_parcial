@@ -44,6 +44,20 @@ public class PlaylistController {
         }
     }
 
+
+    @GetMapping("/byTrack/{trackId}")
+    public ResponseEntity<Object> getPlaylistsByTrackId(@PathVariable Integer trackId) {
+        try {
+            val responses = playlistService.findAllByTracksTrackId(trackId)
+                    .stream()
+                    .map(PlaylistResponse::from)
+                    .toList();
+            return ResponseHandler.success(responses);
+        } catch (Exception e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<Object> findOne(@PathVariable("id") Integer id) {
         try {
@@ -53,7 +67,7 @@ public class PlaylistController {
                 List<Track> top10Tracks = playlist.getTracks().subList(0, Math.min(10, playlist.getTracks().size()));
                 playlist.setTracks(top10Tracks);
                 return ResponseHandler.success(PlaylistWithTracksResponse.from(playlist));
-            } else {
+            }else {
                 return ResponseHandler.notFound();
             }
         } catch (NoSuchElementException ex) {
