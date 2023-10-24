@@ -20,4 +20,5 @@ public class Artist {
 
     @Column(length = 120)
     String name;
+
 }

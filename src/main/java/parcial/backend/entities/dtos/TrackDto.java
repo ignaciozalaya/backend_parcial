@@ -11,6 +11,9 @@ import parcial.backend.entities.Album;
 public class TrackDto {
     Long trackId;
     String name;
-//    Album album;
     Long albumId;
+    Long mediaTypeId;
+    Long genreId;
+    Integer milliseconds;
+    Long unitPrice;
 }

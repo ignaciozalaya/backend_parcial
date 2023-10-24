@@ -36,13 +36,24 @@ public class TracksController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
     }
-    @PutMapping("/{id}")
-    public ResponseEntity<Void> update(@PathVariable("id") Long trackId, @RequestBody TrackDto trackDto) {
+    @PutMapping()
+    public ResponseEntity<Void> update(@RequestBody TrackDto trackDto) {
         try {
             trackService.update(trackDto);
             return ResponseEntity.status(HttpStatus.OK).build();
         } catch (NoSuchElementException ex) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
+    }
+    @PostMapping()
+    public ResponseEntity<Void> add(@RequestBody TrackDto trackDto) {
+
+        trackService.add(trackDto);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable("id") Long trackId) {
+        trackService.delete(trackId);
+        return ResponseEntity.status(HttpStatus.OK).build();
     }
 }

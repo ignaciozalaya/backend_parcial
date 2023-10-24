@@ -64,9 +64,16 @@ public class PlaylistServiceImpl implements PlaylistService {
     }
     @Override
     public PlaylistDto addTrackToPlaylist(Long idPlaylist, Long idTrack) {
+        if (idPlaylist == null || idTrack == null) {
+            throw new RuntimeException("Id playlist and id track are required");
+        }
         Track track = trackService.getByIdTrack(idTrack);
 
         Playlist playlist = playlistRepository.getById(idPlaylist);
+
+        if (playlist.getTracks().contains(track)) {
+            throw new RuntimeException("Track already exists in playlist");
+        }
         playlist.addTrack(track);
         return playlistDtoMapper.apply(playlistRepository.save(playlist));
     }

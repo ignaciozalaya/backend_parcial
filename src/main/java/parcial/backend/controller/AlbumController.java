@@ -96,7 +96,6 @@ public class AlbumController {
         } else {
             return ResponseEntity.badRequest().build();
         }
-
         // Verifica y actualiza el artista asociado al álbum si se proporciona un nuevo artistId
         if (albumRequest.getArtistId() != null) {
             Artist artist = artistService.getById(albumRequest.getArtistId());
@@ -105,7 +104,6 @@ public class AlbumController {
             }
             album.setArtist(artist);
         }
-
         albumService.update(album);
         return ResponseEntity.status(HttpStatus.OK).build();
     }

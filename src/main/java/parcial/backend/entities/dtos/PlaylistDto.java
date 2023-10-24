@@ -12,4 +12,5 @@ public class PlaylistDto {
     Long playlistId;
     String name;
     List<TrackDto> tracks;
+
 }

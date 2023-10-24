@@ -33,9 +33,11 @@ public class Playlist {
             joinColumns = @JoinColumn(name = "PlaylistId"),
             inverseJoinColumns = @JoinColumn(name = "TrackId")
     )
-    @NotNull
     private List<Track> tracks;
-
+    public Playlist(String name) {
+        this.name = name;
+        this.tracks = new ArrayList<>();
+    }
     public Playlist addTrack(Track track) {
         this.tracks.add(track);
         return this;

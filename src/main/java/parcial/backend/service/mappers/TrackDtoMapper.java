@@ -11,6 +11,10 @@ public class TrackDtoMapper implements Function<Track, TrackDto> {
     public TrackDto apply(Track track) {
         return new TrackDto(track.getTrackId(),
                 track.getName(),
-                track.getAlbum().getAlbumId());
+                track.getAlbum().getAlbumId(),
+                track.getMediaType().getMediaTypeId(),
+                track.getGenre().getGenreId(),
+                track.getMilliseconds(),
+                track.getUnitPrice());
     }
 }

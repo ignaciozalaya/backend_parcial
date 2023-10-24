@@ -1,6 +1,7 @@
 package parcial.backend.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -45,6 +46,7 @@ public class Track {
     Integer bytes;
 
     @Column(name = "UnitPrice")
+    @NotNull
     Long unitPrice;
 
     @ManyToMany(mappedBy = "tracks")
@@ -52,6 +54,20 @@ public class Track {
 
 
     public TrackDto toDto(){
-        return new TrackDto(this.trackId, this.name, this.album.getAlbumId());
+//        if (this.album != null) {
+//            return new TrackDto(this.trackId, this.name, this.album.getAlbumId(), this.mediaType.getMediaTypeId(), this.genre.getGenreId(), this.milliseconds, this.unitPrice);
+//        } else {
+//            // Maneja el caso en el que album es nulo
+//            return new TrackDto(this.trackId, this.name, null, this.mediaType.getMediaTypeId(), this.genre.getGenreId(), this.milliseconds, this.unitPrice);
+//        }
+        return new TrackDto(
+                this.trackId,
+                this.name,
+                this.album.getAlbumId(),
+                this.mediaType.getMediaTypeId(),
+                this.genre.getGenreId(),
+                this.milliseconds,
+                this.unitPrice
+        );
     }
 }
