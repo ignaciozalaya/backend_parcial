@@ -3,10 +3,12 @@ package parcial.backend.serviceImpl;
 import org.springframework.stereotype.Service;
 import parcial.backend.entities.Playlist;
 import parcial.backend.entities.Track;
+import parcial.backend.entities.dtos.PlaylistDto;
 import parcial.backend.entities.dtos.TrackDto;
 import parcial.backend.repositories.PlaylistRepository;
 import parcial.backend.service.PlaylistService;
 import parcial.backend.service.TrackService;
+import parcial.backend.service.mappers.PlaylistDtoMapper;
 
 import java.util.List;
 import java.util.Optional;
@@ -15,50 +17,57 @@ import java.util.Optional;
 public class PlaylistServiceImpl implements PlaylistService {
     private final PlaylistRepository playlistRepository;
     private final TrackService trackService;
+    private final PlaylistDtoMapper playlistDtoMapper;
 
-    public PlaylistServiceImpl(PlaylistRepository playlistRepository, TrackService trackService) {
+    public PlaylistServiceImpl(PlaylistRepository playlistRepository, TrackService trackService, PlaylistDtoMapper playlistDtoMapper) {
         this.playlistRepository = playlistRepository;
         this.trackService = trackService;
+        this.playlistDtoMapper = playlistDtoMapper;
     }
 
     @Override
-    public void add(Playlist entity) {
-        this.playlistRepository.save(entity);
+    public void add(PlaylistDto entity) {
+        Playlist playlist = new Playlist();
+        playlist.setName(entity.getName());
+        this.playlistRepository.save(playlist);
     }
 
     @Override
-    public void update(Playlist entity) {
-        this.playlistRepository.save(entity);
+    public void update(PlaylistDto entity) {
+        Optional<Playlist> optionalPlaylistDto = this.playlistRepository.findById(entity.getPlaylistId());
+        optionalPlaylistDto.ifPresent(this.playlistRepository::save);
     }
 
     @Override
-    public Playlist delete(Long aLong) {
+    public PlaylistDto delete(Long aLong) {
         Optional<Playlist> playlistOptional = playlistRepository.findById(aLong);
         playlistOptional.ifPresent(this.playlistRepository::delete);
-        return playlistOptional.orElseThrow();
+        return playlistOptional
+                .map(playlistDtoMapper).orElseThrow();
     }
 
     @Override
-    public Playlist getById(Long aLong) {
+    public PlaylistDto getById(Long aLong) {
         Optional<Playlist> playlistOptional = playlistRepository.findById(aLong);
-        return playlistOptional.
-                orElseThrow();
+        return playlistOptional
+                .map(playlistDtoMapper)
+                .orElseThrow();
     }
 
     @Override
-    public List<Playlist> getAll() {
+    public List<PlaylistDto> getAll() {
         List<Playlist> playlists = this.playlistRepository.findAll();
-        return playlists.stream().toList();
+        return playlists
+                .stream()
+                .map(playlistDtoMapper)
+                .toList();
     }
     @Override
-    public Playlist addTrackToPlaylist(Long idPlaylist, Long idTrack) {
-        TrackDto trackDto = trackService.getById(idTrack);
-
-        Track track = new Track();
-        track.setName(trackDto.getName());
-        track.setAlbum(trackDto.getAlbum());
+    public PlaylistDto addTrackToPlaylist(Long idPlaylist, Long idTrack) {
+        Track track = trackService.getByIdTrack(idTrack);
 
         Playlist playlist = playlistRepository.getById(idPlaylist);
-        return  playlist.addTrack(track);
+        playlist.addTrack(track);
+        return playlistDtoMapper.apply(playlistRepository.save(playlist));
     }
 }

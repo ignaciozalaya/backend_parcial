@@ -4,10 +4,14 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import parcial.backend.entities.Artist;
 import parcial.backend.entities.Playlist;
+import parcial.backend.entities.Track;
+import parcial.backend.entities.dtos.PlaylistDto;
+import parcial.backend.entities.dtos.TrackDto;
 import parcial.backend.service.PlaylistService;
+import parcial.backend.service.TrackService;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -15,19 +19,22 @@ import java.util.NoSuchElementException;
 @RequestMapping("/api/playlists")
 public class PlaylistController {
     private final PlaylistService playlistService;
+    private final TrackService trackService;
 
-    public PlaylistController(@Qualifier("playlistServiceImpl") PlaylistService playlistService) {
+    public PlaylistController(@Qualifier("playlistServiceImpl") PlaylistService playlistService, TrackService trackService) {
         this.playlistService = playlistService;
+        this.trackService = trackService;
     }
     @GetMapping
-    public List<Playlist> GetAll(){
-        List<Playlist> playlists = playlistService.getAll();
+    public List<PlaylistDto> GetAll(){
+        List<PlaylistDto> playlists = playlistService.getAll();
         return playlists.stream().toList();
     }
     @GetMapping("/{id}")
     public ResponseEntity<Object> getById(@PathVariable ("id") Long id ){
         try {
-            Playlist playlist = playlistService.getById(id);
+            PlaylistDto playlist = playlistService.getById(id);
+            List<TrackDto> tracks = playlist.getTracks();
             return ResponseEntity.ok(playlist);
         } catch (NoSuchElementException ex) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
@@ -35,7 +42,7 @@ public class PlaylistController {
     }
 
     @PostMapping
-    public ResponseEntity<Object> addPlaylist(@RequestBody Playlist playlist) {
+    public ResponseEntity<Object> addPlaylist(@RequestBody PlaylistDto playlist) {
         try {
             if (playlist.getName() == null || playlist.getName().isEmpty()) {
                 return ResponseEntity.badRequest().body("El campo 'name' es requerido.");
@@ -59,8 +66,8 @@ public class PlaylistController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
     }
-    @PatchMapping("/{id}")
-    public ResponseEntity<Object> updatePlaylist(@PathVariable("id")Long id, @RequestBody Playlist playlist) {
+    @PutMapping()
+    public ResponseEntity<Object> updatePlaylist(@RequestBody PlaylistDto playlist) {
         try {
             playlistService.update(playlist);
             return ResponseEntity.status(HttpStatus.OK).build();

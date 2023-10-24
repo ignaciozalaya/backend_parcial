@@ -82,7 +82,7 @@ public class AlbumController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al eliminar el álbum: " + e.getMessage());
         }
     }
-    @PatchMapping("/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<Void> updateAlbum(@PathVariable Long id, @RequestBody AlbumRequest albumRequest) {
         Album album = albumService.getById(id);
 

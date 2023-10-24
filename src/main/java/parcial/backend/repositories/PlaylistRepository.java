@@ -5,4 +5,5 @@ import org.springframework.stereotype.Repository;
 import parcial.backend.entities.Playlist;
 @Repository
 public interface PlaylistRepository extends JpaRepository<Playlist, Long> {
+//    Playlist update(Long id, Playlist playlist);
 }

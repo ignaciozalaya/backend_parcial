@@ -3,14 +3,13 @@ package parcial.backend.entities.dtos;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import parcial.backend.entities.Album;
 
+import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class TrackDto {
-    Long trackId;
+public class PlaylistDto {
+    Long playlistId;
     String name;
-//    Album album;
-    Long albumId;
+    List<TrackDto> tracks;
 }

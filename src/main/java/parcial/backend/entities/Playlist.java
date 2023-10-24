@@ -2,12 +2,15 @@ package parcial.backend.entities;
 
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.AccessLevel;
+import parcial.backend.entities.dtos.PlaylistDto;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -30,10 +33,15 @@ public class Playlist {
             joinColumns = @JoinColumn(name = "PlaylistId"),
             inverseJoinColumns = @JoinColumn(name = "TrackId")
     )
+    @NotNull
     private List<Track> tracks;
 
     public Playlist addTrack(Track track) {
         this.tracks.add(track);
         return this;
+    }
+    public PlaylistDto toDto(){
+        if (this.tracks == null) return new PlaylistDto(this.playlistId, this.name, new ArrayList<>());
+        return new PlaylistDto(this.playlistId, this.name, this.tracks.stream().map(Track::toDto).toList());
     }
 }

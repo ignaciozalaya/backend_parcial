@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.AccessLevel;
+import parcial.backend.entities.dtos.TrackDto;
 
 import java.util.List;
 
@@ -48,4 +49,9 @@ public class Track {
 
     @ManyToMany(mappedBy = "tracks")
     private List<Playlist> playlists;
+
+
+    public TrackDto toDto(){
+        return new TrackDto(this.trackId, this.name, this.album.getAlbumId());
+    }
 }

@@ -58,7 +58,7 @@ public class ArtistController {
         }
     }
 
-    @PatchMapping()
+    @PutMapping()
     public ResponseEntity<Object> updateArtist(@RequestBody Artist artist) {
         try {
 
