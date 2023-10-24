@@ -58,12 +58,31 @@ public class PlaylistController {
         }
     }
 
+    @PostMapping("/addTrack")
+    public ResponseEntity<Object> addTrackToPlaylist(@RequestParam Integer playlistId, @RequestParam Integer trackId) {
+        try {
+            Playlist playlist = playlistService.addTrackToPlaylist(playlistId, trackId);
+            if (playlist != null) {
+                return ResponseEntity.status(HttpStatus.CREATED).body(playlist);
+            } else {
+                return ResponseHandler.badRequest("El track ya existe en la playlist.");
+            }
+        } catch (IllegalArgumentException e) {
+            return ResponseHandler.badRequest(e.getMessage());
+        } catch (NoSuchElementException ex) {
+            return ResponseHandler.notFound();
+        } catch (Exception e) {
+            return ResponseHandler.internalError();
+        }
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<Object> findOne(@PathVariable("id") Integer id) {
         try {
             Optional<Playlist> optionalPlaylist = playlistService.findById(id);
             if (optionalPlaylist.isPresent()) {
                 Playlist playlist = optionalPlaylist.get();
+                // TODO: limitador a los 10 primeros tracks
                 List<Track> top10Tracks = playlist.getTracks().subList(0, Math.min(10, playlist.getTracks().size()));
                 playlist.setTracks(top10Tracks);
                 return ResponseHandler.success(PlaylistWithTracksResponse.from(playlist));

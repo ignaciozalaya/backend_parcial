@@ -5,8 +5,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import parcial.backend.entities.Artist;
 import parcial.backend.entities.Playlist;
+import parcial.backend.entities.Track;
 import parcial.backend.repositories.IdentifierRepository;
 import parcial.backend.repositories.PlaylistRepository;
+import parcial.backend.repositories.TrackRepository;
 import parcial.backend.service.PlaylistService;
 
 import java.util.List;
@@ -16,11 +18,14 @@ import java.util.Optional;
 public class PlaylistServiceImpl implements PlaylistService {
     private final IdentifierRepository identifierRepository;
     private final PlaylistRepository playlistRepository;
+    private final TrackRepository trackRepository;
 
     public PlaylistServiceImpl(IdentifierRepository identifierRepository,
-                               PlaylistRepository playlistRepository) {
+                               PlaylistRepository playlistRepository,
+                               TrackRepository trackRepository) {
         this.identifierRepository = identifierRepository;
         this.playlistRepository = playlistRepository;
+        this.trackRepository = trackRepository;
     }
 
     @Override
@@ -66,6 +71,26 @@ public class PlaylistServiceImpl implements PlaylistService {
     @Override
     public Optional<Playlist> findById(Integer id) {
         return playlistRepository.findById(id);
+    }
+
+    @Override
+    @Transactional
+    public Playlist addTrackToPlaylist(Integer playlistId, Integer trackId) {
+        Playlist playlist = playlistRepository.findById(playlistId)
+                .orElseThrow(() -> new IllegalArgumentException("Playlist not found"));
+
+        Track track = trackRepository.findById(trackId)
+                .orElseThrow(() -> new IllegalArgumentException("Track not found"));
+
+        // Añadir el track a la lista de tracks de la playlist
+        List<Track> tracks = playlist.getTracks();
+        if (!tracks.contains(track)) {
+            tracks.add(track);
+            playlist.setTracks(tracks);
+            return playlistRepository.save(playlist);
+        }
+
+        return playlist; // La playlist ya contiene el track
     }
 
 }

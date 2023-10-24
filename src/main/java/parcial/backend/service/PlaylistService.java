@@ -11,6 +11,5 @@ public interface PlaylistService extends Service<Playlist, Integer> {
     Playlist create(String name);
     void update(Integer id, String name);
     List<Playlist> findAllByTracksTrackId(Integer trackId);
-
-
+    Playlist addTrackToPlaylist(Integer playlistId, Integer trackId);
 }
