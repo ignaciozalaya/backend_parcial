@@ -330,7 +330,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "1"
+									"value": "285"
 								}
 							]
 						}
@@ -344,7 +344,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\"name\":\"Daddy Yankee\"}",
+							"raw": "{\r\n    \r\n    \"name\": \"Podes Creer broooo!?\",\r\n    \"albumId\": 27,\r\n    \"mediaTypeId\": 1,\r\n    \"genreId\": 8,\r\n    \"milliseconds\":125,\r\n    \"unitPrice\": 1\r\n}\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -352,7 +352,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/artists",
+							"raw": "http://localhost:8080/api/tracks",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -360,7 +360,7 @@
 							"port": "8080",
 							"path": [
 								"api",
-								"artists"
+								"tracks"
 							]
 						}
 					},
@@ -372,7 +372,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/api/artists/:id",
+							"raw": "http://localhost:8080/api/tracks/:id",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -380,7 +380,7 @@
 							"port": "8080",
 							"path": [
 								"api",
-								"artists",
+								"tracks",
 								":id"
 							],
 							"variable": [
@@ -400,7 +400,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\"artistId\": 3,\r\n    \"name\": \"Aerosmith\"}",
+							"raw": "{\r\n    \"trackId\": 285,\r\n    \"name\": \"Soldado Da Paz\",\r\n    \"albumId\": 26,\r\n    \"mediaTypeId\": 1,\r\n    \"genreId\": 8,\r\n    \"milliseconds\": 194220,\r\n    \"unitPrice\": 0\r\n}\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -408,7 +408,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/artists",
+							"raw": "http://localhost:8080/api/tracks",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -416,7 +416,7 @@
 							"port": "8080",
 							"path": [
 								"api",
-								"artists"
+								"tracks"
 							]
 						}
 					},
@@ -467,7 +467,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "277"
+									"value": "19"
 								}
 							]
 						}
@@ -564,8 +564,33 @@
 		{
 			"name": "PlaylistTrack",
 			"request": {
-				"method": "GET",
-				"header": []
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/playlistTrack/addTrack/:idPlaylist/:idTrack",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"playlistTrack",
+						"addTrack",
+						":idPlaylist",
+						":idTrack"
+					],
+					"variable": [
+						{
+							"key": "idPlaylist",
+							"value": ""
+						},
+						{
+							"key": "idTrack",
+							"value": ""
+						}
+					]
+				}
 			},
 			"response": []
 		}
