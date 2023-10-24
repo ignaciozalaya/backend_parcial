@@ -6,7 +6,6 @@ import org.springframework.transaction.annotation.Transactional;
 import parcial.backend.entities.*;
 import parcial.backend.repositories.IdentifierRepository;
 import parcial.backend.repositories.TrackRepository;
-import parcial.backend.service.TrackService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -66,7 +65,7 @@ public class TrackServiceImpl implements TrackService {
                         Integer bytes,
                         Long unitPrice) {
 
-        Album album = (Album) this.albumService.findByName(albumName).orElseThrow(() -> {
+        Album album = (Album) this.albumService.findByTitle(albumName).orElseThrow(() -> {
             return new IllegalArgumentException("Album not Found");
         });
         MediaType mediaType = (MediaType) this.mediaTypeService.findByName(mediaTypeName).orElseThrow(() -> {
@@ -108,7 +107,7 @@ public class TrackServiceImpl implements TrackService {
                        Long unitPrice) {
         val track = trackRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Track not Found"));
-        var album = albumService.findByName(albumName).
+        var album = albumService.findByTitle(albumName).
                 orElseThrow(() -> new IllegalArgumentException("Album not Found"));
         var mediaType = mediaTypeService.findByName(mediaTypeName).
                 orElseThrow(() -> new IllegalArgumentException("MediaType not Found"));

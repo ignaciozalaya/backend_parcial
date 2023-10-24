@@ -10,6 +10,6 @@ import java.util.Optional;
 
 @Repository
 public interface AlbumRepository extends JpaRepository<Album, Integer> {
-    @Query("SELECT a FROM Album a WHERE a.title = ?1")
-    Optional<Album> findByName(String Name);
+
+    Optional<Album> findByTitle(String title);
 }

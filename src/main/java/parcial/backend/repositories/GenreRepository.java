@@ -10,6 +10,6 @@ import java.util.Optional;
 
 @Repository
 public interface GenreRepository extends JpaRepository<Genre, Integer> {
-    @Query("SELECT g FROM Genre g WHERE g.name = ?1")
+
     Optional<Genre> findByName(String Name);
 }

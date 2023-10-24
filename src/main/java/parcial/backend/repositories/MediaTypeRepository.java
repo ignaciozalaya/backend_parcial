@@ -10,6 +10,6 @@ import java.util.Optional;
 
 @Repository
 public interface MediaTypeRepository extends JpaRepository<MediaType, Long> {
-    @Query("SELECT m FROM MediaType m WHERE m.name = ?1")
+
     Optional<MediaType> findByName(String Name);
 }

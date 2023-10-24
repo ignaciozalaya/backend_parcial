@@ -71,7 +71,7 @@ public class AlbumServiceImpl implements AlbumService {
     }
 
     @Override
-    public Optional<Album> findByName(String name) {
-        return albumRepository.findByName(name);
+    public Optional<Album> findByTitle(String title) {
+        return albumRepository.findByTitle(title);
     }
 }
